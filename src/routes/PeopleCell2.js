@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 // import BootstrapTable from "react-bootstrap-table-next";
 // import PersonService from "../services/PersonService";
-// import 'node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
+// require('../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css');
 
 
 const jobsTypes = ['A', 'B', 'C', 'D'];
@@ -14,7 +14,11 @@ const cellEditProp = {
     blurToSave: true
 };
 
-export default class editTypeTable extends React.Component {
+export default class PeopleViewer extends React.Component {
+    constructor() {
+        super();
+        this.state = {}
+    }
     render() {
         return ( 
         <BootstrapTable data ={ jobsTypes } cellEdit ={ cellEditProp } version='4'>

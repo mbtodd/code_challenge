@@ -2,13 +2,12 @@ import React, { Component } from "react";
 // import BootstrapTable from "react-bootstrap-table-next";
 import PersonService from "../services/PersonService";
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-// require('.node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css');
 
 
 
 
 
-// const jobTypes = ['A', 'B', 'C', 'D'];
+const jobTypes = ['A', 'B', 'C', 'D'];
 const EyeColor = ['Brown', 'Blue', 'Green', 'Hazel'];
 
 
@@ -43,8 +42,8 @@ const columns = [
 
 
 export default class PeopleViewer extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {};
   }
   
@@ -53,12 +52,8 @@ export default class PeopleViewer extends Component {
   }
   
   async fetch() {
-    const people = await PersonService.findAll();
-    const data = people.map(p => ({
-        ...p,
-        firstName: p.name.first,
-        lastName: p.name.last
-    }));
+    const data = await PersonService.findAll();
+    console.warn('got data length '+ data.length)
     this.setState({ data });
   }
   
@@ -70,8 +65,6 @@ export default class PeopleViewer extends Component {
         blurToSave: true
     };
 
-    console.log(data);
-
     if (!data) return null;
 
     return (
@@ -79,14 +72,14 @@ export default class PeopleViewer extends Component {
 
       <BootstrapTable keyfield="id" data={data}  cellEdit = { cellEditProp } bootstrap4={true}>
           <TableHeaderColumn dataField = 'id' isKey = { true }>Person ID</TableHeaderColumn>
-          <TableHeaderColumn dataField = 'lastName' editable = { { type: 'textarea' } }>Last Name</TableHeaderColumn> 
-          <TableHeaderColumn dataField = 'firstName' editable = { { type: 'textarea' } }>First Name</TableHeaderColumn> 
+          <TableHeaderColumn dataField = 'name' editable = { { type: 'textarea' } }>Last Name</TableHeaderColumn> 
+          <TableHeaderColumn dataField = 'name' editable = { { type: 'textarea' } }>First Name</TableHeaderColumn> 
           <TableHeaderColumn dataField = 'type' editable = { { type: 'select', options: { values: EyeColor } } }>Eye Color</TableHeaderColumn>
-          <TableHeaderColumn dataField = 'email' editable = { { type: 'textarea' } }>Email</TableHeaderColumn> 
-          <TableHeaderColumn dataField = 'address' editable = { { type: 'textarea' } }>Address</TableHeaderColumn> 
+          <TableHeaderColumn dataField = 'name' editable = { { type: 'textarea' } }>Email</TableHeaderColumn> 
+          <TableHeaderColumn dataField = 'name' editable = { { type: 'textarea' } }>Address</TableHeaderColumn> 
           {/* <TableHeaderColumn dataField = 'active' editable = { { type: 'checkbox', options: { values: 'Y:N' } } }>Active </TableHeaderColumn>  */}
           {/* <TableHeaderColumn dataField = 'datetime' editable = { { type: 'datetime' } }>Date Time</TableHeaderColumn> */}
-      </BootstrapTable>
+       </BootstrapTable>
     );
   }
 }

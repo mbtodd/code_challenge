@@ -1,3 +1,7 @@
+# Front End Task
+Your task is to create the user interface components and logic to allow users to edit the Person information displayed on /people using the PersonService. You can make any changes necessary to test or improve the application 
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

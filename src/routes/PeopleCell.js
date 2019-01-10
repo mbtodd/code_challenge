@@ -2,14 +2,11 @@ import React, { Component } from "react";
 // import BootstrapTable from "react-bootstrap-table-next";
 import PersonService from "../services/PersonService";
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-// require('.node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css');
+import '../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
 
 
-
-
-// const jobTypes = ['A', 'B', 'C', 'D'];
-const EyeColor = ['Brown', 'Blue', 'Green', 'Hazel'];
+// const eyeColor = ['Brown', 'Blue', 'Green', 'Hazel'];
 
 
 const columns = [
@@ -77,11 +74,12 @@ export default class PeopleViewer extends Component {
     return (
     //   <BootstrapTable keyField="id" data={ data } columns={ columns } cellEdit = { cellEditProp } bootstrap4={true} cellEdit = { cellEditProp } />
 
-      <BootstrapTable keyfield="id" data={data}  cellEdit = { cellEditProp } bootstrap4={true}>
+      <BootstrapTable keyfield="id" data={data}  cellEdit = { cellEditProp } bootstrap4={false} bordered={ true } containerStyle={ { background: 'skyblue' } } version='4'>
           <TableHeaderColumn dataField = 'id' isKey = { true }>Person ID</TableHeaderColumn>
           <TableHeaderColumn dataField = 'lastName' editable = { { type: 'textarea' } }>Last Name</TableHeaderColumn> 
           <TableHeaderColumn dataField = 'firstName' editable = { { type: 'textarea' } }>First Name</TableHeaderColumn> 
-          <TableHeaderColumn dataField = 'type' editable = { { type: 'select', options: { values: EyeColor } } }>Eye Color</TableHeaderColumn>
+          <TableHeaderColumn dataField = 'eyeColor' editable = { { type: 'textarea' } }>Eye Color</TableHeaderColumn> 
+          {/* <TableHeaderColumn dataField = 'type' editable = { { type: 'select', options: { values: eyeColor } } }>Eye Color</TableHeaderColumn> */}
           <TableHeaderColumn dataField = 'email' editable = { { type: 'textarea' } }>Email</TableHeaderColumn> 
           <TableHeaderColumn dataField = 'address' editable = { { type: 'textarea' } }>Address</TableHeaderColumn> 
           {/* <TableHeaderColumn dataField = 'active' editable = { { type: 'checkbox', options: { values: 'Y:N' } } }>Active </TableHeaderColumn>  */}

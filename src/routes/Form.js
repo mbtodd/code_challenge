@@ -7,7 +7,7 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 
 
-const jobTypes = ['A', 'B', 'C', 'D'];
+// const jobTypes = ['A', 'B', 'C', 'D'];
 const EyeColor = ['Brown', 'Blue', 'Green', 'Hazel'];
 
 

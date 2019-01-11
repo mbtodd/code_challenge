@@ -1,14 +1,10 @@
 import React, { Component } from "react";
-import BootstrapTable from "react-bootstrap-table-next";
 import PersonService from "../services/PersonService";
-// import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 
 
-
-
-const jobTypes = ['A', 'B', 'C', 'D'];
-const EyeColor = ['Brown', 'Blue', 'Green', 'Hazel'];
+const eyeColor = ['Brown', 'Blue', 'Green', 'Hazel'];
 
 
 const columns = [
@@ -42,8 +38,8 @@ const columns = [
 
 
 export default class PeopleViewer extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {};
   }
   
@@ -52,8 +48,12 @@ export default class PeopleViewer extends Component {
   }
   
   async fetch() {
-    const data = await PersonService.findAll();
-    // console.warn('got data length '+ data.length)
+    const people = await PersonService.findAll();
+    const data = people.map(p => ({
+        ...p,
+        firstName: p.name.first,
+        lastName: p.name.last
+    }));
     this.setState({ data });
   }
   
@@ -65,21 +65,19 @@ export default class PeopleViewer extends Component {
         blurToSave: true
     };
 
+    console.log(data);
+
     if (!data) return null;
 
     return (
-      <BootstrapTable keyField="id" data={ data } columns={ columns } cellEdit = { cellEditProp } bootstrap4={true} cellEdit = { cellEditProp } />
-
-      // <BootstrapTable keyfield="id" data={ jobTypes }  columns={columns} cellEdit = { cellEditProp } bootstrap4={true}>
-      //     <TableHeaderColumn dataField = 'id' isKey = { true }>Person ID</TableHeaderColumn>
-      //     <TableHeaderColumn dataField = 'name' editable = { { type: 'textarea' } }>Last Name</TableHeaderColumn> 
-      //     <TableHeaderColumn dataField = 'name' editable = { { type: 'textarea' } }>First Name</TableHeaderColumn> 
-      //     <TableHeaderColumn dataField = 'type' editable = { { type: 'select', options: { values: EyeColor } } }>Eye Color</TableHeaderColumn>
-      //     <TableHeaderColumn dataField = 'name' editable = { { type: 'textarea' } }>Email</TableHeaderColumn> 
-      //     <TableHeaderColumn dataField = 'name' editable = { { type: 'textarea' } }>Address</TableHeaderColumn> 
-      //     {/* <TableHeaderColumn dataField = 'active' editable = { { type: 'checkbox', options: { values: 'Y:N' } } }>Active </TableHeaderColumn>  */}
-      //     {/* <TableHeaderColumn dataField = 'datetime' editable = { { type: 'datetime' } }>Date Time</TableHeaderColumn> */}
-      // // </BootstrapTable>
+      <BootstrapTable keyfield="id" data={data}  cellEdit = { cellEditProp } bootstrap4={false} bordered={ true } containerStyle={ { background: 'lightblue' } } version='4' hover>
+          <TableHeaderColumn dataField = 'id' width='400px' isKey = { true }>Person ID</TableHeaderColumn>
+          <TableHeaderColumn dataField = 'lastName' width='120px' editable = { { type: 'textarea' } }>Last Name</TableHeaderColumn> 
+          <TableHeaderColumn dataField = 'firstName' width='120px' editable = { { type: 'textarea' } }>First Name</TableHeaderColumn> 
+          <TableHeaderColumn dataField = 'type' width='200px' editable = { { type: 'select', options: { values: eyeColor } } }>Eye Color</TableHeaderColumn>
+          <TableHeaderColumn dataField = 'email' width='400px' editable = { { type: 'textarea' } }>Email</TableHeaderColumn> 
+          <TableHeaderColumn dataField = 'address' editable = { { type: 'textarea' } }>Address</TableHeaderColumn> 
+      </BootstrapTable>
     );
   }
 }
